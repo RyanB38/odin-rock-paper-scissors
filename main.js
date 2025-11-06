@@ -11,10 +11,14 @@ function getComputerChoice(){
         return "Scissors";
     }
 }
-function getHumanChoice(){
-    const userChoice = prompt("What do you choose? \n");
-    return userChoice;
-}
+const controls = document.querySelector(".player-controls");
+const playerButtons = controls.querySelectorAll("button");
+playerButtons.forEach((button) => {
+    button.addEventListener("click", (button) =>{
+        alert(button.className);      
+    })
+})
+
 function playRound(humanChoice, computerChoice){
     if(humanChoice == computerChoice){
         console.log("Tie neither player wins")
@@ -45,8 +49,7 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
+
 function playGame(){
     humanScore = 0;
     computerScore = 0;
@@ -56,4 +59,3 @@ function playGame(){
     return `The final score was computer ${computerScore} - you ${humanScore}`
     
 }
-console.log(playGame())
