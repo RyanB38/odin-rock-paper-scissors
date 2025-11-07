@@ -1,19 +1,31 @@
-
+const victoryMessage = document.querySelector(".victory-message > p")
 const controls = document.querySelector(".player-controls");
 const playerButtons = controls.querySelectorAll("button");
 const scoreDisplay = document.querySelector(".score");
-const humanScoreDisplay = scoreDisplay.querySelector(".human");
-const computerScoreDisplay = scoreDisplay.querySelector(".computer");
+const humanScoreDisplay = document.createElement('h1')
+const computerScoreDisplay = document.createElement("h1")
+const dash = document.createElement("h1");
+dash.textContent = "-";
+scoreDisplay.appendChild(humanScoreDisplay);
+scoreDisplay.appendChild(dash);
+scoreDisplay.appendChild(computerScoreDisplay);
 let humanScore = 0;
 let computerScore = 0;
 computerScoreDisplay.textContent = computerScore;
 humanScoreDisplay.textContent = humanScore;
-
 playerButtons.forEach((button) => {
     button.addEventListener("click", () => {
         playRound(button.className, getComputerChoice());
         computerScoreDisplay.textContent = computerScore;
-        humanScoreDisplay.textContent = humanScore;})
+        humanScoreDisplay.textContent = humanScore;
+        if(humanScore > 4){
+            humanScore = computerScore = 0;
+            alert("Game over you win");
+        } else if (computerScore > 4){
+            humanScore = computerScore = 0;
+            alert("Game over you lose");
+        }
+        })
     })
     
 function playRound(humanChoice, computerChoice){
@@ -21,26 +33,26 @@ function playRound(humanChoice, computerChoice){
             console.log("Tie neither player wins")
         } else if(humanChoice == "rock"){
             if(computerChoice == "paper"){
-                console.log("You lose paper beats rock");
+                victoryMessage.textContent = "You lose paper beats rock";
                 computerScore++;
             }else{
-                console.log("You win rock beats scissors");
+                victoryMessage.textContent = "You win rock beats scissors";
                 humanScore++;
             }
         } else if(humanChoice == "paper"){
             if(computerChoice == "scissors"){
-                console.log("You lose scissors beats paper");
+                victoryMessage.textContent = "You lose scissors beats paper";
                 computerScore++
             } else {
-                console.log("You win paper beats rock")
+                victoryMessage.textContent = "You win paper beats rock"
                 humanScore++
             }
     } else if(humanChoice == "scissors"){
         if(computerChoice == "Rock"){
-            console.log("You lose rock beats scissors")
+            victoryMessage.textContent = "You lose rock beats scissors"
             computerScore++
         } else {
-            console.log("You win scissors beats paper")
+            victoryMessage.textContent = "You win scissors beats paper"
             humanScore++
         }
     }
